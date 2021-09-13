@@ -10,7 +10,7 @@ spec:
   preferredCluster: "cluster1"
   action: "Failback"
   drPolicyRef:
-    name: dr-policy
+    name: odr-policy-east-west-rpo-5m
   placementRef:
     kind: PlacementRule
     name: busybox-placement
