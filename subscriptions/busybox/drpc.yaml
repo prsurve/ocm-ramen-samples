@@ -6,7 +6,7 @@ metadata:
   labels:
     app: busybox-sample
 spec:
-  preferredCluster: "cluster1"
+  preferredCluster: "vmware-dccp-one"
   drPolicyRef:
     name: dr-policy
   placementRef:
