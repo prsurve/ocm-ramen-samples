@@ -1,0 +1,21 @@
+1---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-4
+  labels:
+    appname: busybox-4
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      imagePullPolicy: IfNotPresent
+      command: ['sh', '-c', 'while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 25; done']
+      volumeMounts:
+        - name: mypvc
+          mountPath: /mnt/test
+  volumes:
+    - name: mypvc
+      persistentVolumeClaim:
+        claimName: busybox-pvc-4
+        readOnly: false
