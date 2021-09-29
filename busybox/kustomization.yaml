@@ -10,3 +10,5 @@ resources:
 - busybox-pod-3.yaml
 - busybox-pvc-4.yaml
 - busybox-pod-4.yaml
+- busybox-pvc-5.yaml
+- busybox-pod-5.yaml
