@@ -4,7 +4,7 @@ kind: Pod
 metadata:
   name: busybox-4
   labels:
-    appname: busybox-4
+    appname: busybox
 spec:
   containers:
     - name: busybox
