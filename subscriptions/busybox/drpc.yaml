@@ -15,7 +15,3 @@ spec:
   pvcSelector:
     matchLabels:
       appname: busybox
-      appname: busybox-1
-      appname: busybox-2
-      appname: busybox-3
-      appname: busybox-4
