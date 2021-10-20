@@ -15,3 +15,4 @@ spec:
   pvcSelector:
     matchLabels:
       appname: busybox
+      workload: mysql
