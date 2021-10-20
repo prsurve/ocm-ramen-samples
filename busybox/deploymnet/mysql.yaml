@@ -14,7 +14,7 @@ spec:
         workload : mysql
     spec:
       containers:
-      - image: mysql:5.6
+      - image: quay.io/bitnami/mysql:5.7
         name: mysql
         env:
           # Use secret in real usage
