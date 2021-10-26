@@ -1,4 +1,4 @@
-namespace: busybox-pratik
+namespace: busybox-workloads
 resources:
 - namespace.yaml
 - placementrule.yaml
