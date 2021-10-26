@@ -2,4 +2,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: busybox-pratik
+  name: busybox-workloads
