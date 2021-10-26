@@ -25,7 +25,7 @@ spec:
           name: mysql
         volumeMounts:
         - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
+          mountPath: /bitnami/mysql
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
