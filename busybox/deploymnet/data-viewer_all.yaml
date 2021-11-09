@@ -87,6 +87,7 @@ items:
         containers:
         - image: ' '
           name: data-viewer
+          imagePullPolicy: Always
           ports:
           - containerPort: 8080
             protocol: TCP
