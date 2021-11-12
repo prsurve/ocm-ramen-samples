@@ -2,7 +2,7 @@
 apiVersion: ramendr.openshift.io/v1alpha1
 kind: DRPlacementControl
 metadata:
-  name: busybox-drpc
+  name: busybox-drpc-2
   labels:
     app: busybox-sample
 spec:
@@ -11,7 +11,7 @@ spec:
     name: odr-policy-east-west-rpo-5m
   placementRef:
     kind: PlacementRule
-    name: busybox-placement
+    name: busybox-placement-2
   pvcSelector:
     matchLabels:
       appname: busybox

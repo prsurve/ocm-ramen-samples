@@ -14,7 +14,7 @@ spec:
         workload : mysql
     spec:
       containers:
-      - image: quay.io/bitnami/mysql:5.7
+      - image: quay.io/prsurve/mysql:latest
         name: mysql
         env:
           # Use secret in real usage
@@ -25,7 +25,7 @@ spec:
           name: mysql
         volumeMounts:
         - name: mysql-persistent-storage
-          mountPath: /bitnami/mysql
+          mountPath: /var/lib/mysql
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
