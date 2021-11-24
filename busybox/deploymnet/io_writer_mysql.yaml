@@ -5,7 +5,7 @@ metadata:
   labels:
     io: io-writer-mysql
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       io: io-writer-mysql
