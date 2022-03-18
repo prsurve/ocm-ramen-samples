@@ -204,5 +204,4 @@ resources:
 - busybox-pvc-99.yaml
 - busybox-pvc-100.yaml
 
-Process finished with exit code 0
 
