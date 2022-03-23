@@ -1,0 +1,155 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: io-writer-httpd-1
+  labels:
+    io: io-writer-httpd-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io: io-writer-httpd-1
+  template:
+    metadata:
+      labels:
+        io: io-writer-httpd-1
+    spec:
+      containers:
+      - name: httpd-io
+        image: quay.io/prsurve/httpd-download:latest
+        command: ['/usr/bin/python3', '/script/run_io.py']
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: httpd-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: httpd-persistent-storage
+        persistentVolumeClaim:
+          claimName: io-writer-httpd-1
+          readOnly: false
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: io-writer-httpd-2
+  labels:
+    io: io-writer-httpd-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io: io-writer-httpd-2
+  template:
+    metadata:
+      labels:
+        io: io-writer-httpd-2
+    spec:
+      containers:
+      - name: httpd-io
+        image: quay.io/prsurve/httpd-download:latest
+        command: ['/usr/bin/python3', '/script/run_io.py']
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: httpd-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: httpd-persistent-storage
+        persistentVolumeClaim:
+          claimName: io-writer-httpd-2
+          readOnly: false
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: io-writer-httpd-3
+  labels:
+    io: io-writer-httpd-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io: io-writer-httpd-3
+  template:
+    metadata:
+      labels:
+        io: io-writer-httpd-3
+    spec:
+      containers:
+      - name: httpd-io
+        image: quay.io/prsurve/httpd-download:latest
+        command: ['/usr/bin/python3', '/script/run_io.py']
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: httpd-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: httpd-persistent-storage
+        persistentVolumeClaim:
+          claimName: io-writer-httpd-3
+          readOnly: false
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: io-writer-httpd-4
+  labels:
+    io: io-writer-httpd-4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io: io-writer-httpd-4
+  template:
+    metadata:
+      labels:
+        io: io-writer-httpd-4
+    spec:
+      containers:
+      - name: httpd-io
+        image: quay.io/prsurve/httpd-download:latest
+        command: ['/usr/bin/python3', '/script/run_io.py']
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: httpd-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: httpd-persistent-storage
+        persistentVolumeClaim:
+          claimName: io-writer-httpd-4
+          readOnly: false
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: io-writer-httpd-5
+  labels:
+    io: io-writer-httpd-5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io: io-writer-httpd-5
+  template:
+    metadata:
+      labels:
+        io: io-writer-httpd-5
+    spec:
+      containers:
+      - name: httpd-io
+        image: quay.io/prsurve/httpd-download:latest
+        command: ['/usr/bin/python3', '/script/run_io.py']
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: httpd-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: httpd-persistent-storage
+        persistentVolumeClaim:
+          claimName: io-writer-httpd-5
+          readOnly: false
+          
