@@ -43,15 +43,15 @@ items:
       sourceStrategy:
         from:
           kind: ImageStreamTag
-          name: httpd-example:latest
+          name: httpd:2.4-el8
           namespace: openshift
       type: Source
     triggers:
     - github:
-        secret: N8BjUqiyE-1_COM_kS7q
+        secret: dTGtxymD7EKyFFEmRKIp
       type: GitHub
     - generic:
-        secret: TGy9R97XUsdoGgLUXNIl
+        secret: WHZFzYxxTY1G_7tPSlH6
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -71,7 +71,7 @@ items:
       app.kubernetes.io/instance: httpd-download
     name: httpd-download
   spec:
-    replicas: 5
+    replicas: 1
     selector:
       matchLabels:
         deployment: httpd-download
@@ -121,4 +121,3 @@ items:
     loadBalancer: {}
 kind: List
 metadata: {}
-
