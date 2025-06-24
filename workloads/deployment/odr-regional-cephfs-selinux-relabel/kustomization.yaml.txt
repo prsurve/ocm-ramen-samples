@@ -1,0 +1,30 @@
+---
+resources:
+  - ../base
+patches:
+  # Customize for internal cephfs storage.
+  - target:
+      kind: PersistentVolumeClaim
+      name: busybox-pvc
+    patch: |-
+      - op: replace
+        path: /spec/storageClassName
+        value: ocs-storagecluster-cephfs-selinux-relabel
+      - op: replace
+        path: /spec/accessModes
+        value:
+          - ReadWriteMany
+  - target:
+      kind: Deployment
+      name: sftpgo
+    patch: |-
+      - op: add
+        path: /spec/template/spec/securityContext
+        value:
+          fsGroupChangePolicy: OnRootMismatch
+          runAsGroup: 0
+          seLinuxOptions:
+            type: spc_t
+      - op: replace
+        path: /spec/template/spec/serviceAccountName
+        value: db-app-sa

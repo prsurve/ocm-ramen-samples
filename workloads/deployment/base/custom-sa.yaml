@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: db-app-sa
+  namespace: regionaldr-testv2
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: db-app-sa-anyuid
+subjects:
+  - kind: ServiceAccount
+    name: db-app-sa
+    namespace: regionaldr-testv2
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: system:openshift:scc:custom
+  namespace: regionaldr-testv2
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:custom
+subjects:
+- kind: ServiceAccount
+  name: db-app-sa
+  namespace: regionaldr-testv2
+

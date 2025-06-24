@@ -1,0 +1,18 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: ocs-storagecluster-cephfs-selinux-relabel
+parameters:
+  kernelMountOptions: 'context="system_u:object_r:container_file_t:s0"'
+  csi.storage.k8s.io/provisioner-secret-namespace: openshift-storage
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+  clusterID: openshift-storage
+  fsName: ocs-storagecluster-cephfilesystem
+  csi.storage.k8s.io/controller-expand-secret-namespace: openshift-storage
+  csi.storage.k8s.io/node-stage-secret-namespace: openshift-storage
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: Immediate
+provisioner: openshift-storage.cephfs.csi.ceph.com

@@ -1,40 +1,116 @@
----
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: busybox
+  name: sftpgo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      appname: busybox
+      app.kubernetes.io/instance: sftpgo
+      app.kubernetes.io/name: sftpgo
   template:
     metadata:
+      creationTimestamp: null
       labels:
-        appname: busybox
+        app.kubernetes.io/instance: sftpgo
+        app.kubernetes.io/name: sftpgo
     spec:
+      restartPolicy: Always
+      serviceAccountName: db-app-sa
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        seLinuxOptions:
+          type: spc_t
+        runAsGroup: 0
+        fsGroupChangePolicy: Always
       containers:
-        - name: logger
-          image: quay.io/nirsof/busybox:stable
+        - resources:
+            limits:
+              cpu: '2'
+              memory: 4G
+            requests:
+              cpu: 500m
+              memory: 1G
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: telemetry
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: sftpgo
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: telemetry
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: SFTPGO_SFTPD__BINDINGS__0__PORT
+              value: '2022'
+            - name: SFTPGO_SFTPD__BINDINGS__0__ADDRESS
+              value: 0.0.0.0
+            - name: SFTPGO_HTTPD__BINDINGS__0__PORT
+              value: '8080'
+            - name: SFTPGO_HTTPD__BINDINGS__0__ADDRESS
+              value: 0.0.0.0
+            - name: SFTPGO_TELEMETRY__BIND_PORT
+              value: '10000'
+            - name: SFTPGO_TELEMETRY__BIND_ADDRESS
+              value: 0.0.0.0
+          securityContext: {}
+          ports:
+            - name: sftp
+              containerPort: 2022
+              protocol: TCP
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: telemetry
+              containerPort: 10000
+              protocol: TCP
           imagePullPolicy: IfNotPresent
-          command:
-            - sh
-            - -c
-            - |
-              emit() {
-                  echo "$(date) $1" | tee -a /var/log/ramen.log
-                  sync
-              }
-              trap "emit STOP; exit" TERM
-              emit START
-              while true; do
-                  sleep 10 & wait
-                  emit UPDATE
-              done
           volumeMounts:
-            - name: varlog
-              mountPath: /var/log
+            - name: config
+              readOnly: true
+              mountPath: /etc/sftpgo/sftpgo.json
+              subPath: sftpgo.json
+            - name: sftpgo-volume
+              mountPath: /var/lib/sftpgo
+            - name: sftpg-data
+              mountPath: /srv/sftpgo
+            - name: sftpg-users
+              mountPath: /srv/sftpgo-users
+            - name: sftpg-data-new
+              mountPath: /srv/sftpgo-new
+          terminationMessagePolicy: File
+          image: 'quay.io/prd/t24x-creg.ps1.platform.vpbank.cloud/sftpgo/sftpgo:v2.6.6-alpine'
+          args:
+            - sftpgo
+            - serve
+      serviceAccount: db-app-sa
       volumes:
-        - name: varlog
+        - name: config
+          configMap:
+            name: sftpgo
+            defaultMode: 420
+        - name: sftpgo-volume
           persistentVolumeClaim:
-            claimName: busybox-pvc
+            claimName: sftpgo
+        - name: sftpg-data
+          persistentVolumeClaim:
+            claimName: pvc-app
+        - name: sftpg-users
+          persistentVolumeClaim:
+            claimName: sftpgo-users-pvc
+        - name: sftpg-data-new
+          persistentVolumeClaim:
+            claimName: pvc-app-new
+      dnsPolicy: ClusterFirst
