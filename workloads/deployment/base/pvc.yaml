@@ -2,7 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: pvc-app
-  namespace: regionaldr-testv2
+  namespace: regionaldr-testv12
   labels:
     regionaldr: test
 spec:
@@ -11,7 +11,7 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  storageClassName: ocs-storagecluster-cephfs
+  storageClassName: ocs-storagecluster-cephfs-selinux-relabel
   volumeMode: Filesystem
 ---
 kind: PersistentVolumeClaim
@@ -33,7 +33,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: sftpgo
-  namespace: regionaldr-testv2
+  namespace: regionaldr-testv12
   labels:
     regionaldr: test
 spec:
@@ -42,14 +42,14 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: ocs-storagecluster-cephfs
+  storageClassName: ocs-storagecluster-cephfs-selinux-relabel
   volumeMode: Filesystem
 --- 
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: sftpgo-users-pvc
-  namespace: regionaldr-testv2
+  namespace: regionaldr-testv12
   labels:
     regionaldr: test
 spec:
@@ -58,5 +58,5 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: ocs-storagecluster-cephfs
+  storageClassName: ocs-storagecluster-cephfs-selinux-relabel
   volumeMode: Filesystem

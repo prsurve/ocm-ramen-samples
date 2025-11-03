@@ -1,38 +1,38 @@
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegeEscalation: true
+allowPrivilegedContainer: false
+allowedCapabilities: null
 apiVersion: security.openshift.io/v1
+defaultAddCapabilities: null
+fsGroup:
+  type: MustRunAs
+groups: []
 kind: SecurityContextConstraints
 metadata:
   name: custom
-allowPrivilegedContainer: false
-allowHostNetwork: false
-allowHostPorts: false
-allowHostPID: false
-allowHostIPC: false
-allowHostDirVolumePlugin: false
-allowPrivilegeEscalation: true
+priority: null
 readOnlyRootFilesystem: false
 requiredDropCapabilities:
-  - KILL
-  - MKNOD
-  - SETUID
-  - SETGID
-defaultAddCapabilities: []
-allowedCapabilities: []
-volumes:
-  - configMap
-  - downwardAPI
-  - emptyDir
-  - persistentVolumeClaim
-  - projected
-  - secret
+- KILL
+- MKNOD
+- SETUID
+- SETGID
 runAsUser:
-  type: RunAsAny
+  type: MustRunAsRange
 seLinuxContext:
   type: RunAsAny
-fsGroup:
-  type: MustRunAs
-  ranges: []
 supplementalGroups:
   type: RunAsAny
-users: []
-groups: []
-priority: null
+users:
+- system:serviceaccount:regionaldr-testv12:db-app-sa
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- persistentVolumeClaim
+- projected
+- secret
