@@ -1,0 +1,5 @@
+---
+resources:
+  - sftpgo-deployment.yaml
+commonLabels:
+  appname: sftpgo
