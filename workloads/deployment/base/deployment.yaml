@@ -19,11 +19,7 @@ spec:
       serviceAccountName: db-app-sa
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
-      # securityContext:
-        # seLinuxOptions:
-        #   type: spc_t
-        # runAsGroup: 0
-        # fsGroupChangePolicy: Always
+
       containers:
         - resources:
             limits:
