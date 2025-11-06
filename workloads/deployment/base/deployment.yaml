@@ -19,7 +19,6 @@ spec:
       serviceAccountName: db-app-sa
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
-
       containers:
         - resources:
             limits:

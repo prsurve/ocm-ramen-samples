@@ -28,7 +28,7 @@ seLinuxContext:
 supplementalGroups:
   type: RunAsAny
 users:
-- system:serviceaccount:regionaldr-testv16:db-app-sa
+- system:serviceaccount:regionaldr-testv17:db-app-sa
 volumes:
 - configMap
 - downwardAPI

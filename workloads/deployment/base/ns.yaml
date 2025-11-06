@@ -2,4 +2,4 @@ apiVersion: v1
 kind: Namespace
 metadata:
 
-  name: regionaldr-testv16
+  name: regionaldr-testv17
