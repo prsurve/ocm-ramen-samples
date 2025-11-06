@@ -2,7 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: pvc-app
-  namespace: regionaldr-testv14
+  namespace: regionaldr-testv15
   labels:
     regionaldr: test
 spec:
@@ -33,7 +33,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: sftpgo
-  namespace: regionaldr-testv14
+  namespace: regionaldr-testv15
   labels:
     regionaldr: test
 spec:
@@ -49,7 +49,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: sftpgo-users-pvc
-  namespace: regionaldr-testv14
+  namespace: regionaldr-testv15
   labels:
     regionaldr: test
 spec:
